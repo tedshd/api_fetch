@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="script.js"></script>
+</head>
+<body>
+
+</body>
+<script>
+  (async() => {
+    try {
+      const res = await apiTest();
+      console.log(res)
+    } catch (error) {
+      console.log('apiTest', error)
+      console.log('apiTest', error.status)
+      console.log('apiTest', error.code)
+    }
+  })()
+</script>
+</html>
