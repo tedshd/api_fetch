@@ -76,8 +76,20 @@ const apiFetch = async (arg) => {
           throw new FetchError(response, { message: 'Unknown Error' });
       }
     }
-    const data = await response.json();
-    return data;
+
+    const contentType = response.headers.get('Content-Type');
+
+    if (contentType.includes('application/json')) {
+        return response.json(); // 解析 JSON 格式
+    } else if (contentType.includes('text/plain')) {
+        return response.text(); // 解析純文本格式
+    } else if (contentType.includes('text/html')) {
+        return response.text(); // 解析 HTML 格式
+    } else if (contentType.includes('image/') || contentType.includes('application/octet-stream')) {
+        return response.blob(); // 解析二進制數據
+    } else {
+        return response.text(); // 默認處理為純文本
+    }
   } catch (error) {
     if (error instanceof FetchError) {
       throw error;
