@@ -34,22 +34,12 @@ const initUrlencoded = (obj) => {
   return urlencoded;
 }
 
-const option = {
-  method:
-  url:
-  body:
-  queryString:
-  header: {
-
-  }
-}
-
 const apiFetch = async (arg) => {
   const option = {
     method: arg.method,
     url: arg.url || '',
-    body: arg.body || '',
-    queryString: arg.queryString || '',
+    body: JSON.stringify(arg.body) || '',
+    queryString: initUrlencoded(arg.queryString) || '',
     header: arg.method || {}
   }
   if (!option.method) {
