@@ -59,7 +59,6 @@ const apiFetch = async (arg) => {
       ...d4Options,
       method: option.method
     });
-    console.log('response', response)
     if (!response.ok) {
       switch (response.status) {
         case 400:
@@ -80,15 +79,15 @@ const apiFetch = async (arg) => {
     const contentType = response.headers.get('Content-Type');
 
     if (contentType.includes('application/json')) {
-        return response.json(); // 解析 JSON 格式
+        return response.json();
     } else if (contentType.includes('text/plain')) {
-        return response.text(); // 解析純文本格式
+        return response.text();
     } else if (contentType.includes('text/html')) {
-        return response.text(); // 解析 HTML 格式
+        return response.text();
     } else if (contentType.includes('image/') || contentType.includes('application/octet-stream')) {
-        return response.blob(); // 解析二進制數據
+        return response.blob();
     } else {
-        return response.text(); // 默認處理為純文本
+        return response.text();
     }
   } catch (error) {
     if (error instanceof FetchError) {
@@ -112,10 +111,6 @@ const apiFetch = async (arg) => {
       } else {
         console.error('Unexpected error:', error);
       }
-      console.log(error instanceof TypeError); // true
-      console.log(error.message); // "null has no properties"
-      console.log(error.name); // "TypeError"
-      console.log(error.stack); // Stack of the error
       console.error('Unexpected error:', error);
     }
   }
