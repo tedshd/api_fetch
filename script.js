@@ -40,7 +40,7 @@ const apiFetch = async (arg) => {
     url: arg.url || '',
     body: arg.body || '',
     queryString: initUrlencoded(arg.queryString) || '',
-    header: arg.method || {}
+    header: arg.header || {}
   }
   if (!option.method) {
     console.error('apiFetch:', 'no set method');
